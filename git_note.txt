@@ -1,4 +1,12 @@
 20171223
+
+//安裝 git 的環境
+在本機可以安裝兩種 git 的環境
+Git-2.15.1.2-64-bit.exe
+或者
+GitHubDesktopSetup.exe
+
+//編輯軟體-1
 千萬不要使用的Windows自帶的記事本編輯任何文本文件。
 原因是微軟開發記事本的團隊使用了一個非常弱智的行為來保存UTF-8編碼的文件，
 他們自作聰明地在每個文件開頭添加了0xefbbbf（十六進制）的字符，你會遇到很多不可思議的問題，
@@ -6,8 +14,137 @@
 建議你下載記事本+代替記事本，不但功能強大，而且免費！
 記得把Notepad ++的默認編碼設置為UTF-8沒有BOM即可。
 
+//編輯軟體-2
+Notepad++ 是一個很優良的免費編輯軟體，在撰寫程式的時候也經常性的會開啟來寫一些簡單的 Code，
+如果它是白的那不就太閃了嗎，因此如何把 Notepad++ 也改成黑色主題（Dark Template）。
 
+在預設的情況下大家的 Notepad++ 都是白白淨淨
+但是我們之前已經把最主要的編輯器改成黑色主題（Dark Template）了所以一切換到 Notepad++ 就會顯得太亮，
+不過這點在 Notepad++ 中早就料想到了，
+於是內建就是可以改成黑色主題（Dark Template）的請使用【自訂】→【設定程式語言格式】→【主題選取】挑一個主題就好了（建議用 Twilight）再按下【儲存&關閉】
+可以參考 http://demo.tc/post/742 這個網站。
+
+//GIT的名詞
 倉儲（repository）、追蹤檔案（track）、預存（stage）及提交（commit）更新。
 本章還會提到如何讓 Git 忽略某些檔案和檔案匹配（patterns）、如何迅速而簡單地撤銷錯誤操作、
 如何瀏覽你專案的歷史版本及觀看不同提交（commits）之間的變更、
 以及如何將更新推送（push）至遠端倉儲或從遠端倉儲拉取（pull）提交。
+
+
+我們在使用 GitHub 的時候，由於預設使用 HTTPS 通訊協定取得 Git 儲存庫，
+例如：**https://github.com/doggy8088/frontend-tools.git**。
+但事實上你可以改用 SSH 選擇當成取得 Git 遠端儲存庫的網址
+
+使用 HTTPS 每次提交都會要求輸入username及password
+使用 ssh 就不用
+
+//開始進行GIT的步驟
+ader@WIN10-DER MINGW64 ~
+$ cd d:
+
+ader@WIN10-DER MINGW64 /d
+$ ls
+'$RECYCLE.BIN'/   APP/   CM_CD/   git/  'System Volume Information'/
+
+ader@WIN10-DER MINGW64 /d
+$ mkdir myfirstgit
+
+ader@WIN10-DER MINGW64 /d
+$ cd myfirstgit
+
+ader@WIN10-DER MINGW64 /d/myfirstgit
+$ pwd
+/d/myfirstgit
+
+ader@WIN10-DER MINGW64 /d/myfirstgit
+$ git init
+Initialized empty Git repository in D:/myfirstgit/.git/
+
+ader@WIN10-DER MINGW64 /d/myfirstgit (master)
+$ ls -ah
+./  ../  .git/
+
+ader@WIN10-DER MINGW64 /d/myfirstgit (master)
+$ ls -alh
+total 8.0K
+drwxr-xr-x 1 ader 197121 0 十二 23 16:16 ./
+drwxr-xr-x 1 ader 197121 0 十二 23 16:15 ../
+drwxr-xr-x 1 ader 197121 0 十二 23 16:16 .git/
+
+ader@WIN10-DER MINGW64 /d/myfirstgit (master)
+$ dir
+git_note.txt
+
+ader@WIN10-DER MINGW64 /d/myfirstgit (master)
+$ git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
+
+ader@WIN10-DER MINGW64 /d/myfirstgit (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   git_note.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+ader@WIN10-DER MINGW64 /d/myfirstgit (master)
+$ git add .
+
+ader@WIN10-DER MINGW64 /d/myfirstgit (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   git_note.txt
+
+
+
+//把一個文件放到Git的倉庫只需要兩步。
+
+第一步，用命令git add告訴Git，把文件添加到倉庫：
+
+$ git add readme.txt
+
+執行上面的命令，沒有任何顯示，這就對了，UNIX的哲學是“沒有消息就是好消息”，說明添加成功。
+
+第二步，用命令git commit 告訴 Git，把文件提交到倉庫：
+
+$ git commit -m "wrote a readme file"
+
+[master (root-commit) cb926e7] wrote a readme file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 readme.txt
+ 
+在 dos command 模式下
+
+D:\myfirstgit>git add git_note.txt
+
+D:\myfirstgit>git commit -m "first create git note report! 20171223 00:55"
+[master (root-commit) aaa2e2c] first create git note report! 20171223 00:55
+ 1 file changed, 13 insertions(+)
+ create mode 100644 git_note.txt
+ 
+D:\myfirstgit>git remote add origin https://github.com/aderho/MyFirstGit.git
+
+D:\myfirstgit>git push -u origin master
+Counting objects: 3, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 970 bytes | 485.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/aderho/MyFirstGit.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+使用 ssh 方式 push
+
+D:\myfirstgit>git remote add origin git@github.com:aderho/aderho.git 
+
+D:\myfirstgit>git push -u origin master
