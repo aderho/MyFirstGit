@@ -38,6 +38,11 @@ Notepad++ 是一個很優良的免費編輯軟體，在撰寫程式的時候也�
 使用 HTTPS 每次提交都會要求輸入username及password
 使用 ssh 就不用
 
+使用 HTTPS 通訊協定來存取 GitHub 上的遠端儲存庫，由於無法記憶帳號密碼，所以每次執行遠端儲存庫的指令一定都會被要求輸入帳號、密碼。
+但改用 SSH 的話，就可以透過預先定義好的金鑰來進行身分驗證。
+這一對金鑰，預設就放在 %USERPROFILE%\.ssh 資料夾下，如果你的 Windows 登入使用者名稱為 ader 的話，
+這個路徑就位於 C:\Users\ader\.ssh 目錄下。這對金鑰的檔名分別是 github_rsa (私鑰) 與 github_rsa.pub (公鑰)。
+
 //開始進行GIT的步驟
 ader@WIN10-DER MINGW64 ~
 $ cd d:
